@@ -1,0 +1,7 @@
+{
+  "name": "ConecTarapak",
+  "description": "Plataforma disruptiva de crowdfunding y red de impacto para el distrito Rapak, conectando emprendedores, inversores y mentores.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
