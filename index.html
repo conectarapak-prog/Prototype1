@@ -4,16 +4,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ConecTarapak - Aerospace Investment Intelligence</title>
+  <title>ConecTarapak - Global Impact Intelligence</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;600;900&family=Outfit:wght@100;300;600;900&display=swap" rel="stylesheet">
   <style>
     :root { 
-      --accent: #0ea5e9; 
-      --accent-glow: rgba(14, 165, 233, 0.4);
-      --bg-dark: #020617;
-      --panel-bg: rgba(15, 23, 42, 0.9);
+      --accent: #14b8a6; /* Teal Eléctrico */
+      --accent-alt: #f59e0b; /* Cobre Atacama */
+      --accent-glow: rgba(20, 184, 166, 0.3);
+      --bg-dark: #050505;
+      --panel-bg: rgba(10, 10, 10, 0.85);
     }
     
     html, body {
@@ -25,7 +26,7 @@
 
     body { 
       font-family: 'Inter', sans-serif; 
-      color: #f1f5f9;
+      color: #f8fafc;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
@@ -36,10 +37,10 @@
       content: '';
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
-      background: radial-gradient(circle at 50% -20%, #0c4a6e 0%, transparent 50%),
-                  radial-gradient(circle at 0% 100%, #082f49 0%, transparent 30%);
+      background: radial-gradient(circle at 50% -20%, #134e4a 0%, transparent 50%),
+                  radial-gradient(circle at 0% 100%, #1e1b4b 0%, transparent 30%);
       z-index: -1;
-      opacity: 0.6;
+      opacity: 0.4;
     }
 
     .reveal {
@@ -54,69 +55,64 @@
 
     .aero-panel {
       background: var(--panel-bg);
-      backdrop-filter: blur(30px);
-      border: 1px solid rgba(14, 165, 233, 0.15);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+      backdrop-filter: blur(40px);
+      border: 1px solid rgba(20, 184, 166, 0.1);
+      box-shadow: 0 25px 60px rgba(0,0,0,0.8);
     }
 
-    /* Enmarcado Técnico Perfeccionado */
     .tech-frame {
-      border: 1px solid rgba(14, 165, 233, 0.2);
+      border: 1px solid rgba(20, 184, 166, 0.15);
       position: relative;
-      background: rgba(15, 23, 42, 0.3);
     }
     .tech-frame::before {
       content: '';
       position: absolute;
-      top: -1px; left: -1px; width: 12px; height: 12px;
+      top: -1px; left: -1px; width: 15px; height: 15px;
       border-top: 2px solid var(--accent); border-left: 2px solid var(--accent);
       pointer-events: none;
     }
     .tech-frame::after {
       content: '';
       position: absolute;
-      bottom: -1px; right: -1px; width: 12px; height: 12px;
-      border-bottom: 2px solid var(--accent); border-right: 2px solid var(--accent);
+      bottom: -1px; right: -1px; width: 15px; height: 15px;
+      border-bottom: 2px solid var(--accent-alt); border-right: 2px solid var(--accent-alt);
       pointer-events: none;
     }
     
-    /* Custom Scrollbar Thin */
-    .custom-scrollbar::-webkit-scrollbar { 
-      width: 4px; 
-    }
-    .custom-scrollbar::-webkit-scrollbar-track { 
-      background: transparent; 
-    }
+    .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
     .custom-scrollbar::-webkit-scrollbar-thumb { 
-      background: rgba(14, 165, 233, 0.3);
+      background: rgba(20, 184, 166, 0.2);
       border-radius: 10px;
     }
-    .custom-scrollbar::-webkit-scrollbar-thumb:hover { 
-      background: var(--accent);
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+    .glow-teal { box-shadow: 0 0 40px rgba(20, 184, 166, 0.1); }
+
+    .stretched-text {
+      display: block;
+      width: 100%;
+      text-align: center;
+      white-space: nowrap;
+      letter-spacing: -0.02em;
+      transform: scaleY(1.1);
+      transform-origin: center;
+      line-height: 1.2;
+      overflow: visible;
     }
 
-    /* Range Input Perfeccionado */
-    input[type=range]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      height: 18px;
-      width: 18px;
-      border-radius: 2px;
-      background: #fff;
-      cursor: pointer;
-      box-shadow: 0 0 15px var(--accent);
-      border: 1px solid var(--accent);
-      margin-top: -7px;
+    .bg-gradient-tarapaca {
+      background: linear-gradient(135deg, #14b8a6 0%, #0f766e 100%);
     }
-    input[type=range]::-webkit-slider-runnable-track {
-      width: 100%;
-      height: 4px;
-      cursor: pointer;
-      background: rgba(14, 165, 233, 0.1);
-      border-radius: 2px;
+
+    .text-gradient-copper {
+      background: linear-gradient(to right, #f59e0b, #b45309);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     * {
-      transition: border-color 0.4s ease, background-color 0.4s ease;
+      transition: border-color 0.4s ease, background-color 0.4s ease, box-shadow 0.4s ease;
     }
   </style>
 <script type="importmap">
