@@ -1,75 +1,120 @@
 
 import React, { useState, useMemo, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Project } from '../types';
 
-const MOCK_PROJECTS: Project[] = [
+const FICTITIOUS_PROJECTS: Project[] = [
   { 
-    id: '1', 
-    title: 'Desal-Solar Circular', 
-    creator: 'Eco-Innova Tara', 
-    description: 'Planta modular de desalinización solar con cero emisiones y aprovechamiento de salmuera para procesos industriales.', 
-    category: 'Energía / Infraestructura', 
-    goal: 120000, 
+    id: 'p1', 
+    title: 'H2V-Nexus Rapak', 
+    creator: 'Atacama Hydrogen Corp', 
+    description: 'Planta piloto de producción de Hidrógeno Verde para transporte minero pesado utilizando energía eólica residual.', 
+    category: 'Energía / H2V', 
+    goal: 450000, 
     raised: 125000, 
-    investors: 256, 
-    image: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=800', 
-    status: 'funded',
+    investors: 42, 
+    image: 'https://images.unsplash.com/photo-1508791191529-0a3333cd0941?q=80&w=800', 
+    status: 'active',
     minInvestment: 500,
-    daysLeft: 0,
+    daysLeft: 42,
+    valuation: 3200000,
+    returnEstimate: '22% TIR',
+    riskLevel: 'Alto',
+    milestones: [
+      { label: 'INGENIERÍA BÁSICA', amount: 50000, completed: true },
+      { label: 'PERMISOS AMBIENTALES', amount: 150000, completed: false },
+      { label: 'MONTAJE ELECTROLIZADOR', amount: 250000, completed: false }
+    ],
+    team: [{ name: 'Carlos Meza', role: 'CTO Energy', img: 'https://i.pravatar.cc/150?u=carlos' }]
+  },
+  { 
+    id: 'p2', 
+    title: 'Desal-Grid Modular', 
+    creator: 'Eco-H2O Tara', 
+    description: 'Sistema descentralizado de desalinización por ósmosis inversa alimentado por paneles solares bifaciales.', 
+    category: 'Infraestructura / Agua', 
+    goal: 180000, 
+    raised: 165000, 
+    investors: 112, 
+    image: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=800', 
+    status: 'active',
+    minInvestment: 200,
+    daysLeft: 12,
     valuation: 950000,
-    returnEstimate: '18% TIR Anual',
+    returnEstimate: '15% ROI',
     riskLevel: 'Moderado',
     milestones: [
-      { label: 'PROTOTIPO ALPHA', amount: 30000, completed: true },
-      { label: 'ESCALAMIENTO NIVEL 1', amount: 60000, completed: true },
-      { label: 'EXPANSIÓN LATAM', amount: 30000, completed: false }
+      { label: 'PROTOTIPO ALPHA', amount: 40000, completed: true },
+      { label: 'VALIDACIÓN EN SALAR', amount: 80000, completed: true },
+      { label: 'RED DE DISTRIBUCIÓN', amount: 60000, completed: false }
     ],
-    team: [{ name: 'Elena Solís', role: 'CEO', img: 'https://i.pravatar.cc/150?u=elena' }]
+    team: [{ name: 'Elena Solís', role: 'Director Proyecto', img: 'https://i.pravatar.cc/150?u=elena' }]
   },
   { 
-    id: '3', 
-    title: 'Hub-OS Tarapacá', 
-    creator: 'ConecTarapak Labs', 
-    description: 'Sistema descentralizado para la gobernanza de recursos hídricos y energéticos en el distrito Rapak.', 
+    id: 'p3', 
+    title: 'Lithium-Trace BC', 
+    creator: 'White Gold Systems', 
+    description: 'Protocolo de trazabilidad blockchain para asegurar la procedencia ética y baja huella de carbono del litio.', 
     category: 'SaaS / Blockchain', 
-    goal: 45000, 
-    raised: 12500, 
-    investors: 84, 
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800', 
-    status: 'active',
+    goal: 85000, 
+    raised: 85000, 
+    investors: 89, 
+    image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800', 
+    status: 'funded',
     minInvestment: 100,
-    daysLeft: 45,
-    valuation: 350000,
-    returnEstimate: 'Equity + Dividendos',
+    daysLeft: 0,
+    valuation: 1500000,
+    returnEstimate: '18% Dividendos',
     riskLevel: 'Bajo',
     milestones: [
-      { label: 'VALIDACIÓN REGIONAL', amount: 15000, completed: true },
-      { label: 'LANZAMIENTO NODOS', amount: 30000, completed: false }
+      { label: 'MVB BLOCKCHAIN', amount: 30000, completed: true },
+      { label: 'CONTRATO MINERO PILOTO', amount: 55000, completed: true }
     ],
-    team: [{ name: 'Lucas Viana', role: 'CTO', img: 'https://i.pravatar.cc/150?u=lucas' }]
+    team: [{ name: 'Lucas Viana', role: 'Core Dev', img: 'https://i.pravatar.cc/150?u=lucas' }]
   },
   { 
-    id: '4', 
-    title: 'Recicla-Min Pro', 
+    id: 'p4', 
+    title: 'Agro-Dry Vertical', 
+    creator: 'Desert Harvest', 
+    description: 'Granjas verticales automatizadas con hidroponía de precisión para cultivo de vegetales en zonas desérticas extremas.', 
+    category: 'Agro-Tech', 
+    goal: 120000, 
+    raised: 45000, 
+    investors: 28, 
+    image: 'https://images.unsplash.com/photo-1530836361253-ee294074b4b4?q=80&w=800', 
+    status: 'active',
+    minInvestment: 300,
+    daysLeft: 35,
+    valuation: 720000,
+    returnEstimate: '20% TIR',
+    riskLevel: 'Moderado',
+    milestones: [
+      { label: 'VALIDACIÓN IA RIEGO', amount: 40000, completed: true },
+      { label: 'ESTRUCTURA MÓDULO 1', amount: 80000, completed: false }
+    ],
+    team: [{ name: 'Sara Wu', role: 'Agrónoma IA', img: 'https://i.pravatar.cc/150?u=sara' }]
+  },
+  { 
+    id: 'p5', 
+    title: 'Bio-Relave Recovery', 
     creator: 'Circular Minerals', 
-    description: 'Recuperación de metales de valor en relaves mineros mediante biotecnología aplicada.', 
-    category: 'Minería / Impacto', 
-    goal: 250000, 
-    raised: 185000, 
-    investors: 412, 
+    description: 'Biotecnología aplicada para la recuperación de minerales valiosos a partir de relaves mineros abandonados.', 
+    category: 'Minería / Circular', 
+    goal: 280000, 
+    raised: 210000, 
+    investors: 156, 
     image: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=800', 
     status: 'active',
     minInvestment: 1000,
-    daysLeft: 12,
-    valuation: 2100000,
-    returnEstimate: '22.5% ROI Esperado',
+    daysLeft: 18,
+    valuation: 4100000,
+    returnEstimate: '25% TIR',
     riskLevel: 'Alto',
     milestones: [
-      { label: 'PATENTE BIOTECH', amount: 50000, completed: true },
-      { label: 'PLANTA PILOTO TARA', amount: 100000, completed: false },
-      { label: 'OPERACIÓN FULL', amount: 100000, completed: false }
+      { label: 'CEPAS BACTERIANAS', amount: 60000, completed: true },
+      { label: 'PLANTA PILOTO MÓVIL', amount: 220000, completed: false }
     ],
-    team: [{ name: 'Dr. Aris Tech', role: 'Science Lead', img: 'https://i.pravatar.cc/150?u=aris' }]
+    team: [{ name: 'Dr. Aris Tech', role: 'Chief Scientist', img: 'https://i.pravatar.cc/150?u=aris' }]
   }
 ];
 
@@ -77,40 +122,40 @@ const Projects: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [invAmount, setInvAmount] = useState<number>(0);
   const [protocolStatus, setProtocolStatus] = useState<'idle' | 'processing' | 'success'>('idle');
-  const [filter, setFilter] = useState('Todos');
+  
+  // Matriz de Filtros
+  const [riskFilter, setRiskFilter] = useState('Todos');
+  const [returnFilter, setReturnFilter] = useState('Todos');
+  const [stageFilter, setStageFilter] = useState('Todos');
   const [searchQuery, setSearchQuery] = useState('');
-  const [sortBy, setSortBy] = useState<'recent' | 'raised' | 'goal'>('recent');
+  const [showFilters, setShowFilters] = useState(false);
 
   useEffect(() => {
     if (selectedProject) document.body.style.overflow = 'hidden';
     else document.body.style.overflow = 'auto';
   }, [selectedProject]);
 
-  // Lógica de filtrado y búsqueda real
   const filteredProjects = useMemo(() => {
-    return MOCK_PROJECTS.filter(p => {
+    return FICTITIOUS_PROJECTS.filter(p => {
       const matchesSearch = p.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
                            p.creator.toLowerCase().includes(searchQuery.toLowerCase());
-      const matchesFilter = filter === 'Todos' || 
-                           (filter === 'Escalamiento' ? p.status === 'funded' : p.category.includes(filter));
-      return matchesSearch && matchesFilter;
-    }).sort((a, b) => {
-      if (sortBy === 'raised') return b.raised - a.raised;
-      if (sortBy === 'goal') return b.goal - a.goal;
-      return 0; // 'recent' as default
-    });
-  }, [filter, searchQuery, sortBy]);
+      const matchesRisk = riskFilter === 'Todos' || p.riskLevel === riskFilter;
+      
+      const returnVal = parseFloat(p.returnEstimate) || 0;
+      let matchesReturn = returnFilter === 'Todos';
+      if (returnFilter === '<15%') matchesReturn = returnVal < 15;
+      if (returnFilter === '15-20%') matchesReturn = returnVal >= 15 && returnVal <= 20;
+      if (returnFilter === '>20%') matchesReturn = returnVal > 20;
 
-  const stats = useMemo(() => {
-    if (!selectedProject) return { participation: 0, estimatedReturn: 0 };
-    const amt = invAmount || selectedProject.minInvestment;
-    // Lógica de ROI basada en riesgo real
-    const riskMultiplier = selectedProject.riskLevel === 'Alto' ? 1.45 : selectedProject.riskLevel === 'Moderado' ? 1.25 : 1.12;
-    return { 
-      participation: (amt / selectedProject.valuation) * 100,
-      estimatedReturn: amt * riskMultiplier 
-    };
-  }, [invAmount, selectedProject]);
+      const completedMilestones = p.milestones.filter(m => m.completed).length;
+      let matchesStage = stageFilter === 'Todos';
+      if (stageFilter === 'Semilla') matchesStage = completedMilestones === 0;
+      if (stageFilter === 'Validación') matchesStage = completedMilestones >= 1 && p.status !== 'funded';
+      if (stageFilter === 'Consolidado') matchesStage = p.status === 'funded';
+
+      return matchesSearch && matchesRisk && matchesReturn && matchesStage;
+    });
+  }, [riskFilter, returnFilter, stageFilter, searchQuery]);
 
   const handleExecute = () => {
     setProtocolStatus('processing');
@@ -119,20 +164,20 @@ const Projects: React.FC = () => {
       setTimeout(() => {
         setProtocolStatus('idle');
         setSelectedProject(null);
-      }, 2500);
-    }, 2000);
+      }, 2000);
+    }, 2500);
   };
 
-  const investmentTiers = [
-    { label: 'Inversor Semilla', min: 100, bonus: 'Acceso a Reportes Trimestrales' },
-    { label: 'Socio de Red', min: 1000, bonus: 'Voto en Decisiones de Escalamiento' },
-    { label: 'Líder de Impacto', min: 5000, bonus: 'Placa en Planta + Equity Preferente' }
-  ];
+  const calculateStats = useMemo(() => {
+    if (!selectedProject) return { equity: 0, return: 0 };
+    const equity = (invAmount / selectedProject.valuation) * 100;
+    const estimatedReturn = invAmount * (parseFloat(selectedProject.returnEstimate) / 100 + 1);
+    return { equity, return: estimatedReturn };
+  }, [invAmount, selectedProject]);
 
   return (
     <div className="max-w-screen-2xl mx-auto px-8 md:px-16 lg:px-24 py-24 min-h-screen">
       
-      {/* HEADER DE MERCADO DINÁMICO CON BUSCADOR */}
       <header className="reveal flex flex-col space-y-16 border-b border-sky-500/10 pb-20 mb-24">
         <div className="flex flex-col md:flex-row justify-between items-end gap-12">
           <div className="space-y-6">
@@ -141,94 +186,98 @@ const Projects: React.FC = () => {
               <span className="text-[12px] font-mono text-sky-500 uppercase tracking-[0.6em] font-black">Capital de Impacto Regional</span>
             </div>
             <h1 className="text-6xl md:text-8xl font-black tracking-tighter uppercase font-outfit leading-none">
-              Activos <br/><span className="text-white/20 italic">de Futuro</span>
+              Proyectos <br/><span className="text-white/20 italic">de Inversión</span>
             </h1>
           </div>
           
           <div className="flex flex-col gap-6 w-full md:w-auto">
-             {/* BARRA DE BÚSQUEDA TÁCTICA */}
-             <div className="relative group">
-                <i className="fas fa-search absolute left-6 top-1/2 -translate-y-1/2 text-sky-900 group-focus-within:text-sky-500 transition-colors"></i>
-                <input 
-                  type="text" 
-                  placeholder="BUSCAR ACTIVO O EMISOR..." 
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="bg-black/40 border border-sky-500/10 focus:border-sky-500/50 focus:outline-none px-16 py-5 text-[11px] font-mono tracking-[0.2em] w-full md:w-[400px] uppercase text-white transition-all"
-                />
+             <div className="flex justify-end">
+                <Link to="/onboarding" className="px-10 py-5 bg-teal-500 text-white font-mono text-[11px] uppercase tracking-[0.5em] font-black hover:bg-white hover:text-black transition-all glow-teal shadow-2xl flex items-center gap-4 group">
+                  <i className="fas fa-plus group-hover:rotate-90 transition-transform"></i>
+                  Registrar Activo
+                </Link>
              </div>
              
-             <div className="flex flex-wrap gap-3 aero-panel p-2 rounded-sm bg-black/40 border-sky-500/10">
-                {['Todos', 'Energía', 'SaaS', 'Minería', 'Escalamiento'].map(cat => (
-                  <button 
-                    key={cat}
-                    onClick={() => setFilter(cat)}
-                    className={`text-[10px] font-mono px-6 py-3 uppercase tracking-[0.2em] font-black transition-all ${
-                      filter === cat ? 'bg-sky-500 text-white shadow-xl' : 'text-slate-600 hover:text-white'
-                    }`}
-                  >
-                    {cat}
-                  </button>
-                ))}
+             <div className="flex gap-4">
+                <div className="relative group flex-grow md:flex-none">
+                    <i className="fas fa-search absolute left-6 top-1/2 -translate-y-1/2 text-sky-900"></i>
+                    <input 
+                      type="text" 
+                      placeholder="BUSCAR PROYECTO..." 
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className="bg-slate-900/40 border border-sky-500/10 focus:border-sky-500/50 focus:outline-none px-16 py-5 text-[11px] font-mono tracking-[0.2em] w-full md:w-[400px] uppercase text-white"
+                    />
+                </div>
+                <button 
+                  onClick={() => setShowFilters(!showFilters)}
+                  className={`px-8 flex items-center gap-4 font-mono text-[11px] uppercase tracking-widest transition-all ${showFilters ? 'bg-teal-500 text-white border-teal-500' : 'bg-white/5 border border-white/10 text-slate-400'}`}
+                >
+                  <i className="fas fa-sliders"></i>
+                  Terminal de Filtros
+                </button>
              </div>
           </div>
         </div>
 
-        {/* ORDENAMIENTO */}
-        <div className="flex justify-end items-center gap-8">
-           <span className="text-[10px] font-mono text-slate-700 uppercase tracking-widest font-black">Ordenar por:</span>
-           <div className="flex gap-4">
-              {[
-                { id: 'recent', label: 'RECIENTES' },
-                { id: 'raised', label: 'MAYOR RECAUDO' },
-                { id: 'goal', label: 'OBJETIVO' }
-              ].map(sort => (
-                <button 
-                  key={sort.id}
-                  onClick={() => setSortBy(sort.id as any)}
-                  className={`text-[9px] font-mono uppercase tracking-[0.1em] font-bold ${sortBy === sort.id ? 'text-sky-400' : 'text-slate-500'}`}
-                >
-                  {sort.label}
-                </button>
-              ))}
-           </div>
+        {/* Terminal de Filtros Desplegable */}
+        <div className={`overflow-hidden transition-all duration-700 ease-in-out ${showFilters ? 'max-h-[600px] opacity-100' : 'max-h-0 opacity-0'}`}>
+          <div className="aero-panel p-10 grid grid-cols-1 md:grid-cols-3 gap-12 border-teal-500/20 tech-frame mb-12 shadow-2xl">
+            <div className="space-y-4">
+              <span className="text-[10px] font-mono text-teal-500 uppercase tracking-widest font-black block">Matriz de Riesgo</span>
+              <div className="flex flex-wrap gap-2">
+                {['Todos', 'Bajo', 'Moderado', 'Alto'].map(r => (
+                  <button key={r} onClick={() => setRiskFilter(r)} className={`px-4 py-2 text-[9px] font-mono border uppercase transition-all ${riskFilter === r ? 'bg-teal-500 border-teal-500 text-white' : 'border-white/5 text-slate-500 hover:border-white/20'}`}>{r}</button>
+                ))}
+              </div>
+            </div>
+            <div className="space-y-4">
+              <span className="text-[10px] font-mono text-teal-500 uppercase tracking-widest font-black block">Proyección Retorno</span>
+              <div className="flex flex-wrap gap-2">
+                {['Todos', '<15%', '15-20%', '>20%'].map(r => (
+                  <button key={r} onClick={() => setReturnFilter(r)} className={`px-4 py-2 text-[9px] font-mono border uppercase transition-all ${returnFilter === r ? 'bg-teal-500 border-teal-500 text-white' : 'border-white/5 text-slate-500 hover:border-white/20'}`}>{r}</button>
+                ))}
+              </div>
+            </div>
+            <div className="space-y-4">
+              <span className="text-[10px] font-mono text-teal-500 uppercase tracking-widest font-black block">Etapa Desarrollo</span>
+              <div className="flex flex-wrap gap-2">
+                {['Todos', 'Semilla', 'Validación', 'Consolidado'].map(s => (
+                  <button key={s} onClick={() => setStageFilter(s)} className={`px-4 py-2 text-[9px] font-mono border uppercase transition-all ${stageFilter === s ? 'bg-teal-500 border-teal-500 text-white' : 'border-white/5 text-slate-500 hover:border-white/20'}`}>{s}</button>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </header>
 
-      {/* GRILLA DE PROYECTOS FILTRADA */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 min-h-[400px]">
-        {filteredProjects.length > 0 ? filteredProjects.map((p, idx) => (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+        {filteredProjects.map((p, idx) => (
           <div 
             key={p.id} 
-            className="reveal aero-panel tech-frame group hover:border-sky-500/50 transition-all duration-700 cursor-pointer overflow-hidden flex flex-col h-full" 
+            className="reveal aero-panel tech-frame group hover:border-teal-500/50 transition-all duration-700 cursor-pointer overflow-hidden flex flex-col" 
             style={{ transitionDelay: `${idx * 100}ms` }}
             onClick={() => { setSelectedProject(p); setInvAmount(p.minInvestment); }}
           >
             <div className="relative aspect-[16/9] overflow-hidden">
               <img src={p.image} alt={p.title} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 scale-100 group-hover:scale-110" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
-              
-              <div className="absolute top-6 left-6 flex gap-3 z-20">
-                <span className="bg-sky-500 text-[9px] font-mono px-3 py-1.5 uppercase font-black tracking-widest shadow-2xl">
-                  {p.category.split('/')[0]}
-                </span>
-                {p.status === 'funded' && (
-                  <span className="bg-green-600 text-[9px] font-mono px-3 py-1.5 uppercase font-black tracking-widest shadow-2xl flex items-center gap-2">
-                    <i className="fas fa-rocket text-[7px] animate-bounce"></i> Escalamiento
-                  </span>
-                )}
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent"></div>
+              <div className="absolute top-6 left-6 flex flex-col gap-2">
+                <span className="bg-teal-500 text-[9px] font-mono px-3 py-1.5 uppercase font-black tracking-widest shadow-2xl">{p.category.split('/')[0]}</span>
+                <span className={`text-[9px] font-mono px-3 py-1.5 uppercase font-black tracking-widest shadow-2xl ${p.riskLevel === 'Alto' ? 'bg-rose-600' : p.riskLevel === 'Moderado' ? 'bg-amber-600' : 'bg-green-600'}`}>RIESGO_{p.riskLevel.toUpperCase()}</span>
               </div>
             </div>
 
             <div className="p-10 flex-grow flex flex-col space-y-8">
               <div className="space-y-2">
-                <h3 className="text-3xl font-black uppercase font-outfit tracking-tighter group-hover:text-sky-400 transition-colors leading-none">{p.title}</h3>
-                <p className="text-[11px] font-mono text-slate-500 uppercase tracking-widest font-black">Por {p.creator}</p>
+                <h3 className="text-3xl font-black uppercase font-outfit tracking-tighter group-hover:text-teal-400 transition-colors leading-none">{p.title}</h3>
+                <div className="flex justify-between items-center">
+                    <p className="text-[11px] font-mono text-slate-500 uppercase tracking-widest font-black">Por {p.creator}</p>
+                    <span className="text-[11px] font-mono text-teal-500 font-bold">{p.returnEstimate}</span>
+                </div>
               </div>
 
-              <p className="text-sm text-slate-400 leading-relaxed font-light line-clamp-2 h-10">{p.description}</p>
-              
-              <div className="pt-6 border-t border-sky-500/10 space-y-6">
+              <div className="pt-6 border-t border-white/5 space-y-6">
                 <div className="flex justify-between items-end">
                    <div className="space-y-1">
                       <span className="text-[9px] font-mono text-slate-600 uppercase font-black tracking-widest">Recaudado</span>
@@ -236,231 +285,132 @@ const Projects: React.FC = () => {
                    </div>
                    <div className="text-right space-y-1">
                       <span className="text-[9px] font-mono text-slate-600 uppercase font-black tracking-widest">Inversores</span>
-                      <p className="text-2xl font-black font-outfit tracking-tighter text-sky-500">{p.investors}</p>
+                      <p className="text-2xl font-black font-outfit tracking-tighter text-teal-500">{p.investors}</p>
                    </div>
                 </div>
 
                 <div className="space-y-2">
-                  <div className="h-1.5 bg-sky-950/30 w-full overflow-hidden rounded-full">
+                  <div className="h-1 bg-slate-900 w-full overflow-hidden">
                     <div 
-                      className={`h-full transition-all duration-1000 ${p.status === 'funded' ? 'bg-green-500' : 'bg-sky-500'}`} 
+                      className="h-full bg-teal-500 transition-all duration-1000" 
                       style={{ width: `${Math.min((p.raised/p.goal)*100, 100)}%` }}
                     ></div>
                   </div>
                   <div className="flex justify-between text-[9px] font-mono font-black uppercase tracking-widest">
-                    <span className={p.status === 'funded' ? 'text-green-500' : 'text-sky-800'}>
-                      {((p.raised/p.goal)*100).toFixed(0)}% Completado
-                    </span>
-                    <span className="text-slate-700">Objetivo: ${p.goal.toLocaleString()}</span>
+                    <span className="text-teal-800">{((p.raised/p.goal)*100).toFixed(0)}% SINCRO</span>
+                    <span className="text-slate-700">OBJ: ${p.goal.toLocaleString()}</span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        )) : (
-          <div className="col-span-full py-32 text-center space-y-8 animate-pulse">
-             <i className="fas fa-satellite-dish text-6xl text-sky-900"></i>
-             <p className="text-xl font-mono text-slate-600 uppercase tracking-[0.5em]">No se detectan activos con esos parámetros de búsqueda</p>
-             <button onClick={() => {setFilter('Todos'); setSearchQuery('');}} className="text-sky-500 font-mono text-sm underline tracking-widest uppercase">Reiniciar Protocolo de Búsqueda</button>
-          </div>
-        )}
+        ))}
       </div>
 
-      {/* MODAL DATA ROOM MULTIDIMENSIONAL */}
       {selectedProject && (
-        <div className="fixed inset-0 z-[100] bg-black/98 flex items-center justify-center p-4 md:p-10 backdrop-blur-3xl animate-in fade-in duration-500">
-          <div className="aero-panel w-full max-w-[1700px] h-[95vh] flex flex-col relative overflow-hidden border-sky-500/30 md:rounded-lg tech-frame">
+        <div className="fixed inset-0 z-[100] bg-slate-950/95 flex items-center justify-center p-6 md:p-12 backdrop-blur-3xl animate-in fade-in duration-500">
+          <div className="aero-panel w-full max-w-[1500px] h-[90vh] flex flex-col relative overflow-hidden border-teal-500/30 tech-frame">
             
             {protocolStatus === 'processing' && (
-              <div className="absolute inset-0 z-[120] bg-black/90 flex flex-col items-center justify-center space-y-8 backdrop-blur-2xl">
-                <div className="w-24 h-24 border-2 border-sky-500 border-t-transparent rounded-full animate-spin"></div>
-                <p className="text-[12px] font-mono text-sky-500 uppercase tracking-[1em] font-black animate-pulse">AUTENTICANDO TRANSACCIÓN REGIONAL...</p>
+              <div className="absolute inset-0 z-[120] bg-slate-950/90 flex flex-col items-center justify-center space-y-8 backdrop-blur-2xl">
+                <div className="w-20 h-20 border-2 border-teal-500 border-t-transparent rounded-full animate-spin"></div>
+                <p className="text-[11px] font-mono text-teal-500 uppercase tracking-[0.8em] font-black animate-pulse">AUTENTICANDO TRANSACCIÓN...</p>
               </div>
             )}
 
-            <div className="p-8 md:p-12 border-b border-sky-500/10 flex flex-col md:flex-row justify-between items-start md:items-center bg-black/60 shrink-0 z-10 gap-8">
-              <div className="space-y-4">
-                <div className="flex items-center gap-4">
-                  <span className="text-[10px] font-mono text-sky-500 border border-sky-500/30 px-3 py-1 uppercase font-black tracking-[0.4em]">Auditado por IA</span>
-                  <span className="text-[10px] font-mono text-green-500 border border-green-500/30 px-3 py-1 uppercase font-black tracking-[0.4em]">Enlace Seguro</span>
-                </div>
-                <h2 className="text-4xl md:text-6xl font-black uppercase font-outfit leading-none tracking-tighter">{selectedProject.title}</h2>
+            <div className="p-10 border-b border-white/5 flex justify-between items-center bg-[#0f172a]/60 shrink-0">
+              <div className="space-y-2">
+                <span className="text-[10px] font-mono text-teal-500 uppercase tracking-[0.4em] font-black">Auditoría Regional Activa</span>
+                <h2 className="text-4xl md:text-5xl font-black uppercase font-outfit leading-none tracking-tighter">{selectedProject.title}</h2>
               </div>
-              <button 
-                onClick={() => setSelectedProject(null)} 
-                className="w-16 h-16 border border-sky-500/20 hover:border-sky-500 hover:bg-sky-500/10 transition-all text-2xl font-light flex items-center justify-center rounded-full"
-              >✕</button>
+              <button onClick={() => setSelectedProject(null)} className="w-12 h-12 border border-white/10 hover:border-teal-500 transition-all text-xl">✕</button>
             </div>
 
             <div className="flex-grow flex flex-col lg:flex-row overflow-hidden">
-              
-              <div className="flex-grow overflow-y-auto p-8 md:p-16 lg:p-20 space-y-24 custom-scrollbar bg-black/40">
+              <div className="flex-grow overflow-y-auto p-12 md:p-16 space-y-20 custom-scrollbar">
                 <div className="grid grid-cols-1 xl:grid-cols-2 gap-16">
-                  
                   <div className="space-y-12">
-                    <section className="tech-frame p-10 bg-white/[0.01] space-y-6">
-                      <h4 className="text-[12px] font-mono text-sky-500 uppercase tracking-[0.6em] font-black border-b border-sky-500/10 pb-4">Tesis_Estratégica</h4>
-                      <p className="text-xl font-light leading-relaxed text-slate-300 italic">
-                        "{selectedProject.description}"
-                      </p>
-                      <div className="grid grid-cols-3 gap-4 pt-6">
-                        <div className="p-4 border border-sky-500/5 bg-sky-500/5 text-center">
-                          <span className="text-[8px] font-mono text-slate-600 block mb-1 uppercase">Riesgo</span>
-                          <span className="text-sm font-black uppercase text-white tracking-widest">{selectedProject.riskLevel}</span>
-                        </div>
-                        <div className="p-4 border border-sky-500/5 bg-sky-500/5 text-center">
-                          <span className="text-[8px] font-mono text-slate-600 block mb-1 uppercase">Valuación</span>
-                          <span className="text-sm font-black uppercase text-white tracking-widest">${(selectedProject.valuation/1000000).toFixed(1)}M</span>
-                        </div>
-                        <div className="p-4 border border-sky-500/5 bg-sky-500/5 text-center">
-                          <span className="text-[8px] font-mono text-slate-600 block mb-1 uppercase">Tipo</span>
-                          <span className="text-sm font-black uppercase text-white tracking-widest">Equity</span>
-                        </div>
-                      </div>
+                    <section className="tech-frame p-8 bg-white/[0.01] space-y-6">
+                      <h4 className="text-[11px] font-mono text-teal-500 uppercase tracking-[0.6em] font-black border-b border-white/5 pb-4">Tesis_Estratégica</h4>
+                      <p className="text-lg font-light leading-relaxed text-slate-300 italic">"{selectedProject.description}"</p>
                     </section>
-
-                    <section className="tech-frame p-10 bg-black/40 space-y-10">
-                      <h4 className="text-[12px] font-mono text-sky-500 uppercase tracking-[0.6em] font-black border-b border-sky-500/10 pb-4">Hoja_de_Ruta</h4>
-                      <div className="relative pt-8 pb-4">
-                        <div className="absolute top-[48px] left-4 right-4 h-[1px] bg-sky-900/30"></div>
-                        <div className="grid grid-cols-3 relative z-10">
-                          {['Concepto', 'Prototipo', 'Mercado'].map((stage, i) => (
-                            <div key={i} className="flex flex-col items-center gap-4">
-                              <div className={`w-8 h-8 rounded-sm rotate-45 border-2 flex items-center justify-center transition-all duration-700 ${i < 2 ? 'bg-sky-500 border-sky-500 shadow-[0_0_20px_#0ea5e9]' : 'bg-black border-sky-900'}`}>
-                                {i < 2 && <i className="fas fa-check -rotate-45 text-[10px] text-white"></i>}
-                              </div>
-                              <span className={`text-[10px] font-mono font-black uppercase tracking-widest ${i < 2 ? 'text-white' : 'text-slate-700'}`}>{stage}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                      <div className="space-y-4 pt-4">
+                    <section className="tech-frame p-8 bg-slate-900/40 space-y-10">
+                      <h4 className="text-[11px] font-mono text-teal-500 uppercase tracking-[0.6em] font-black border-b border-white/5 pb-4">Hoja_de_Ruta_Fisica</h4>
+                      <div className="space-y-6">
                         {selectedProject.milestones.map((m, i) => (
-                          <div key={i} className={`flex items-center justify-between p-6 border transition-all ${m.completed ? 'border-sky-500/20 bg-sky-500/5' : 'border-white/5 bg-white/5 opacity-40'}`}>
-                            <div className="flex items-center gap-6">
-                              <span className="text-[10px] font-mono text-sky-800 font-black">0{i+1}</span>
-                              <span className="text-sm font-black uppercase tracking-tighter">{m.label}</span>
+                          <div key={i} className={`flex items-center justify-between p-5 border transition-all ${m.completed ? 'border-teal-500/20 bg-teal-500/5' : 'border-white/5 opacity-40'}`}>
+                            <div className="flex items-center gap-4">
+                              <span className="text-[9px] font-mono text-teal-800 font-black">0{i+1}</span>
+                              <span className="text-xs font-black uppercase tracking-widest">{m.label}</span>
                             </div>
-                            <span className="text-xs font-mono text-sky-600">${m.amount.toLocaleString()}</span>
+                            <span className="text-[10px] font-mono text-teal-600">${m.amount.toLocaleString()}</span>
                           </div>
                         ))}
                       </div>
                     </section>
                   </div>
-
-                  <div className="space-y-12">
-                    <section className="tech-frame p-10 bg-white/[0.01] space-y-8">
-                       <h4 className="text-[12px] font-mono text-sky-500 uppercase tracking-[0.6em] font-black border-b border-sky-500/10 pb-4">Liderazgo_Técnico</h4>
-                       <div className="grid grid-cols-1 gap-6">
-                         {selectedProject.team.map((member, i) => (
-                            <div key={i} className="flex items-center gap-6 p-4 border border-sky-500/5 hover:bg-sky-500/5 transition-all">
-                               <img src={member.img} alt={member.name} className="w-16 h-16 rounded-full grayscale border border-sky-500/20" />
-                               <div>
-                                  <p className="text-xl font-black uppercase font-outfit leading-none">{member.name}</p>
-                                  <p className="text-[10px] font-mono text-sky-500 uppercase tracking-widest font-bold mt-2">{member.role}</p>
-                               </div>
-                            </div>
-                         ))}
+                  <div className="space-y-8">
+                     <img src={selectedProject.image} className="w-full h-80 object-cover grayscale opacity-50 tech-frame" alt="" />
+                     <div className="grid grid-cols-2 gap-4">
+                       <div className="p-6 aero-panel text-center">
+                         <span className="text-[9px] font-mono text-slate-600 uppercase block mb-1">Riesgo Auditado</span>
+                         <span className="text-lg font-black text-white uppercase font-outfit">{selectedProject.riskLevel}</span>
                        </div>
-                    </section>
+                       <div className="p-6 aero-panel text-center">
+                         <span className="text-[9px] font-mono text-slate-600 uppercase block mb-1">Potencial Retorno</span>
+                         <span className="text-lg font-black text-teal-500 uppercase font-outfit">{selectedProject.returnEstimate}</span>
+                       </div>
+                     </div>
                   </div>
                 </div>
-                <div className="h-20"></div>
               </div>
 
-              {/* CONSOLA DE INVERSIÓN INTERACTIVA */}
-              <div className="w-full lg:w-[580px] xl:w-[650px] bg-sky-500/[0.02] border-l border-sky-500/10 flex flex-col shrink-0">
-                <div className="p-10 md:p-14 space-y-16 h-full overflow-y-auto custom-scrollbar flex flex-col">
-                  
-                  <div className="tech-frame p-12 bg-black/70 shadow-[0_0_80px_rgba(14,165,233,0.1)] space-y-12">
-                    <div className="flex justify-between items-center border-b border-sky-500/10 pb-6">
-                      <h5 className="text-[12px] font-mono text-sky-400 uppercase font-black tracking-[0.5em]">Terminal de Transacción</h5>
-                      <div className="flex items-center gap-2">
-                         <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-                         <span className="text-[10px] font-mono text-green-500 uppercase font-black tracking-widest">Sincronizado</span>
+              <div className="w-full lg:w-[450px] bg-teal-500/[0.02] border-l border-white/5 flex flex-col shrink-0 p-12 space-y-12">
+                <div className="tech-frame p-10 bg-[#0f172a]/70 shadow-2xl space-y-10">
+                  <h5 className="text-[11px] font-mono text-teal-400 uppercase font-black tracking-[0.5em] border-b border-white/5 pb-6">Terminal de Inyección</h5>
+                  <div className="space-y-8">
+                    <div className="flex flex-col gap-4">
+                      <span className="text-[10px] font-mono text-slate-500 uppercase tracking-[0.4em] font-black">Monto a Inyectar (USD)</span>
+                      <div className="flex items-baseline justify-between border-b border-white/10 pb-2">
+                        <span className="text-teal-500 text-2xl font-black font-mono">$</span>
+                        <input 
+                          type="number" 
+                          value={invAmount} 
+                          onChange={(e) => setInvAmount(Math.max(selectedProject.minInvestment, Number(e.target.value)))}
+                          className="bg-transparent text-white text-5xl font-black font-outfit tracking-tighter w-full text-right focus:outline-none"
+                        />
                       </div>
+                    </div>
+                    <div className="flex justify-between text-[9px] font-mono text-slate-700 uppercase font-black">
+                      <span>Mínimo Protocolo: ${selectedProject.minInvestment}</span>
                     </div>
                     
-                    <div className="space-y-10">
-                      <div className="flex flex-col gap-4">
-                        <span className="text-[11px] font-mono text-slate-500 uppercase tracking-[0.4em] font-black">Monto a Inyectar (USD)</span>
-                        <div className="flex items-baseline justify-between border-b border-sky-500/20 pb-4">
-                          <span className="text-sky-500 text-3xl font-black font-mono">$</span>
-                          <input 
-                            type="number" 
-                            value={invAmount} 
-                            onChange={(e) => setInvAmount(Math.max(selectedProject.minInvestment, Number(e.target.value)))}
-                            className="bg-transparent text-white text-6xl font-black font-outfit tracking-tighter w-full text-right focus:outline-none focus:text-sky-400 transition-colors"
-                          />
-                        </div>
-                      </div>
-                      
-                      <div className="space-y-6">
-                        <input 
-                          type="range" min={selectedProject.minInvestment} max={selectedProject.goal} step={500} 
-                          value={invAmount} onChange={(e)=>setInvAmount(Number(e.target.value))}
-                          className="w-full h-1.5 bg-sky-950/40 rounded-lg appearance-none cursor-pointer accent-sky-500"
-                        />
-                        <div className="flex justify-between text-[10px] font-mono font-black tracking-widest uppercase text-sky-900">
-                          <span>Umbral Min: ${selectedProject.minInvestment.toLocaleString()}</span>
-                          <span>Cupo Max: ${selectedProject.goal.toLocaleString()}</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 gap-10 pt-10 border-t border-sky-500/10">
+                    <div className="grid grid-cols-1 gap-6 pt-4">
                         <div className="flex justify-between items-center">
-                          <p className="text-[11px] font-mono text-slate-500 uppercase tracking-[0.4em] font-black">Participación Equity</p>
-                          <p className="text-4xl font-black text-white tracking-tighter font-outfit">{stats.participation.toFixed(4)}%</p>
+                          <span className="text-[10px] font-mono text-slate-600 uppercase font-black tracking-widest">Participación Equity</span>
+                          <span className="text-2xl font-black text-white font-outfit">{calculateStats.equity.toFixed(4)}%</span>
                         </div>
                         <div className="flex justify-between items-center">
-                          <p className="text-[11px] font-mono text-slate-500 uppercase tracking-[0.4em] font-black">Retorno Proyectado (12m)</p>
-                          <p className="text-4xl font-black text-sky-500 tracking-tighter font-outfit">${stats.estimatedReturn.toLocaleString()}</p>
+                          <span className="text-[10px] font-mono text-slate-600 uppercase font-black tracking-widest">Retorno Proyectado</span>
+                          <span className="text-2xl font-black text-teal-500 font-outfit">${calculateStats.return.toLocaleString()}</span>
                         </div>
                     </div>
                   </div>
+                </div>
 
-                  {/* NIVELES DE SOCIO DINÁMICOS */}
-                  <div className="space-y-8">
-                    <h5 className="text-[12px] font-mono text-sky-800 uppercase tracking-[0.5em] font-black">Status de Beneficios</h5>
-                    <div className="grid grid-cols-1 gap-4">
-                      {investmentTiers.map((tier, i) => (
-                        <div 
-                          key={i} 
-                          className={`p-6 border transition-all cursor-pointer ${invAmount >= tier.min ? 'border-sky-500/50 bg-sky-500/10 scale-[1.02]' : 'border-white/5 bg-white/5 opacity-40 hover:opacity-60'}`}
-                          onClick={() => setInvAmount(tier.min)}
-                        >
-                           <div className="flex justify-between items-center mb-2">
-                              <div className="flex items-center gap-4">
-                                {invAmount >= tier.min && <i className="fas fa-certificate text-sky-500 animate-spin-slow"></i>}
-                                <span className="text-lg font-black uppercase font-outfit">{tier.label}</span>
-                              </div>
-                              <span className="text-xs font-mono text-sky-500">+${tier.min}</span>
-                           </div>
-                           <p className="text-[10px] text-slate-400 uppercase tracking-widest font-bold">{tier.bonus}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="mt-auto space-y-8 pt-12 pb-16">
-                    <button 
-                      onClick={handleExecute}
-                      disabled={protocolStatus !== 'idle'}
-                      className={`w-full py-12 text-white font-mono text-[18px] uppercase tracking-[1.4em] font-black transition-all duration-700 shadow-[0_20px_80px_rgba(14,165,233,0.3)] relative overflow-hidden tech-frame ${
-                        protocolStatus === 'success' ? 'bg-green-600' : 'bg-sky-500 hover:bg-white hover:text-black hover:tracking-[1.6em]'
-                      }`}
-                    >
-                      <div className="relative z-10">
-                        {protocolStatus === 'idle' && 'EJECUTAR TRANSACCIÓN'}
-                        {protocolStatus === 'processing' && 'SINCRONIZANDO...'}
-                        {protocolStatus === 'success' && 'CONFIRMADO'}
-                      </div>
-                    </button>
-                    <p className="text-[10px] text-center text-sky-900/60 uppercase font-mono tracking-[0.2em] leading-relaxed font-bold italic">
-                      Al ejecutar la transacción, usted acepta la tesis de impacto auditada por el Núcleo Advisor.
-                    </p>
-                  </div>
+                <div className="mt-auto space-y-6">
+                  <button 
+                    onClick={handleExecute}
+                    disabled={protocolStatus !== 'idle'}
+                    className={`w-full py-8 text-white font-mono text-[14px] uppercase tracking-[1em] font-black transition-all duration-700 tech-frame shadow-2xl overflow-hidden ${
+                      protocolStatus === 'success' ? 'bg-green-600' : 'bg-teal-500 hover:bg-white hover:text-black'
+                    }`}
+                  >
+                    {protocolStatus === 'idle' && 'EJECUTAR ORDEN'}
+                    {protocolStatus === 'processing' && 'SINCRO_RT...'}
+                    {protocolStatus === 'success' && 'ORDEN CONFIRMADA'}
+                  </button>
+                  <p className="text-[9px] text-center text-slate-600 uppercase font-mono tracking-widest leading-relaxed italic">Al ejecutar, acepta los términos de gobernanza del Distrito Rapak.</p>
                 </div>
               </div>
             </div>

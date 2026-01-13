@@ -5,7 +5,7 @@ const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 export const askCommunityAssistant = async (prompt: string, history: { role: 'user' | 'model', text: string }[]) => {
   try {
-    const model = 'gemini-3-flash-preview';
+    const model = 'gemini-3-pro-preview';
     
     const chat = ai.chats.create({
       model: model,
@@ -14,12 +14,23 @@ export const askCommunityAssistant = async (prompt: string, history: { role: 'us
         parts: [{ text: h.text }]
       })),
       config: {
-        systemInstruction: `Eres el Asistente IA de ConecTarapak, la plataforma líder de crowdfunding e innovación en la región de Tarapacá. Tu misión es:
-        1. Asesorar en el escalamiento nacional e internacional de proyectos regionales.
-        2. Fomentar alianzas estratégicas y la consolidación de ideas innovadoras.
-        3. Priorizar el impacto ambiental y la economía circular en cada consejo.
-        4. Brindar acompañamiento automatizado para la ejecución técnica y financiera impecable de cada proyecto.
-        Mantén un tono profesional, motivador, regionalista pero con visión global, y altamente técnico en ejecución. Respuestas en ESPAÑOL.`,
+        systemInstruction: `Eres el "Núcleo Estratégico ConecTarapak", una IA de consultoría de élite. 
+        Tu metodología de respuesta para AUDITORÍAS DE VIABILIDAD debe ser extremadamente estructurada:
+        
+        1. ESTRUCTURA DE INFORME:
+           - Usa Títulos en Mayúsculas (ej. ### ANÁLISIS DE MERCADO).
+           - Usa el carácter "|" al inicio y final de puntos clave para crear bloques destacados (ej. | Régimen Zona Franca: Beneficio 0% arancelario |).
+           - Resalta conceptos técnicos en negrita **Concepto**.
+        
+        2. CONTENIDO ESTRATÉGICO:
+           - Si detectas mención a Tarapacá, integra SIEMPRE el impacto en la cadena de valor local (Zofri, Puerto, Minería).
+           - Define niveles de riesgo: [BAJO], [MODERADO], [CRÍTICO].
+           - Proyecta ESCALABILIDAD internacional.
+        
+        3. ESTILO: Ejecutor financiero, directo, sin introducciones innecesarias. Ve al grano con datos duros.
+        
+        Idioma: Español profesional técnico.`,
+        thinkingConfig: { thinkingBudget: 4000 }
       }
     });
 
