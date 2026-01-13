@@ -40,20 +40,20 @@ const MarketTicker = () => {
   const TickerList = () => (
     <>
       {stocks.map((s, i) => (
-        <div key={i} className="flex items-center space-x-6 px-12 border-r border-white/10 h-full group cursor-pointer hover:bg-white/5 transition-colors">
+        <div key={i} className="flex items-center space-x-6 px-12 border-r border-slate-200 h-full group cursor-pointer hover:bg-slate-50 transition-colors">
           <div className="flex flex-col">
-            <span className="text-[8px] font-mono text-slate-500 font-black tracking-widest uppercase mb-0.5">
+            <span className="text-[8px] font-mono text-slate-400 font-black tracking-widest uppercase mb-0.5">
               {s.category}
             </span>
-            <span className="text-[11px] font-mono font-black text-white/90 whitespace-nowrap tracking-tighter">
+            <span className="text-[11px] font-mono font-black text-slate-900 whitespace-nowrap tracking-tighter">
               {s.symbol}
             </span>
           </div>
           <div className="flex flex-col items-end">
-            <span className="text-[12px] font-mono font-black text-white">
+            <span className="text-[12px] font-mono font-black text-slate-900">
               {s.price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
             </span>
-            <span className={`text-[9px] font-mono font-black flex items-center leading-none ${s.change >= 0 ? 'text-teal-400' : 'text-rose-500'}`}>
+            <span className={`text-[9px] font-mono font-black flex items-center leading-none ${s.change >= 0 ? 'text-teal-600' : 'text-rose-600'}`}>
               <i className={`fas fa-caret-${s.change >= 0 ? 'up' : 'down'} mr-1`}></i>
               {Math.abs(s.change).toFixed(2)}%
             </span>
@@ -64,15 +64,15 @@ const MarketTicker = () => {
   );
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-[100] h-12 bg-black/95 backdrop-blur-xl border-b border-teal-500/30 overflow-hidden select-none shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
+    <div className="fixed top-0 left-0 right-0 z-[100] h-12 bg-white/95 backdrop-blur-xl border-b border-slate-200 overflow-hidden select-none shadow-sm">
       <div className="animate-ticker h-full items-center">
         <TickerList />
         <TickerList />
       </div>
-      <div className="absolute right-0 top-0 bottom-0 bg-gradient-to-l from-black via-black/80 to-transparent pl-20 pr-6 flex items-center">
+      <div className="absolute right-0 top-0 bottom-0 bg-gradient-to-l from-white via-white/80 to-transparent pl-20 pr-6 flex items-center">
         <div className="flex items-center gap-3">
-          <span className="w-1.5 h-1.5 rounded-full bg-teal-500 animate-pulse shadow-[0_0_8px_#14b8a6]"></span>
-          <span className="text-[9px] font-mono text-teal-500 font-black tracking-[0.3em] uppercase">SINCRO_RT</span>
+          <span className="w-1.5 h-1.5 rounded-full bg-teal-600 animate-pulse shadow-[0_0_8px_#14b8a6]"></span>
+          <span className="text-[9px] font-mono text-teal-600 font-black tracking-[0.3em] uppercase">SINCRO_RT</span>
         </div>
       </div>
     </div>
@@ -83,13 +83,13 @@ const NavLink = ({ to, active, children }: React.PropsWithChildren<{ to: string,
   <Link 
     to={to} 
     className={`relative px-8 py-2 text-[13px] font-mono tracking-[0.4em] uppercase transition-all duration-500 font-bold ${
-      active ? 'text-teal-400' : 'text-slate-400 hover:text-white'
+      active ? 'text-teal-600' : 'text-slate-500 hover:text-slate-900'
     }`}
   >
     {children}
     {active && (
-      <span className="absolute bottom-[-10px] left-8 right-8 h-[2px] bg-teal-400 shadow-[0_0_20px_#14b8a6]">
-        <span className="absolute inset-0 bg-teal-400 animate-pulse"></span>
+      <span className="absolute bottom-[-10px] left-8 right-8 h-[2px] bg-teal-600 shadow-[0_0_10px_rgba(20,184,166,0.3)]">
+        <span className="absolute inset-0 bg-teal-600 animate-pulse"></span>
       </span>
     )}
   </Link>
@@ -100,18 +100,18 @@ const Navbar = () => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <nav className="sticky top-12 z-[60] bg-[#0f172a]/90 backdrop-blur-2xl border-b border-white/5">
+    <nav className="sticky top-12 z-[60] bg-white/80 backdrop-blur-2xl border-b border-slate-200">
       <div className="max-w-screen-2xl mx-auto px-8 md:px-16 h-24 flex justify-between items-center">
         <Link to="/" className="group flex items-center space-x-5">
           <div className="relative">
-            <div className="w-12 h-12 border-2 border-teal-500/20 group-hover:border-teal-500 group-hover:rotate-180 transition-all duration-1000 flex items-center justify-center rounded-sm">
-              <div className="w-5 h-5 bg-teal-500 shadow-[0_0_20px_#14b8a6]"></div>
+            <div className="w-12 h-12 border-2 border-teal-600/20 group-hover:border-teal-600 group-hover:rotate-180 transition-all duration-1000 flex items-center justify-center rounded-sm">
+              <div className="w-5 h-5 bg-teal-600 shadow-[0_0_20px_rgba(20,184,166,0.3)]"></div>
             </div>
-            <div className="absolute inset-0 bg-teal-500/10 blur-2xl opacity-0 group-hover:opacity-100 transition-all duration-700"></div>
+            <div className="absolute inset-0 bg-teal-600/5 blur-2xl opacity-0 group-hover:opacity-100 transition-all duration-700"></div>
           </div>
           <div className="flex flex-col">
-            <span className="text-2xl font-black tracking-[0.1em] uppercase font-outfit leading-none">Conectarapak</span>
-            <span className="text-[10px] font-mono text-teal-500 font-bold tracking-[0.4em] uppercase">Intelligence Hub</span>
+            <span className="text-2xl font-black text-slate-900 tracking-[0.1em] uppercase font-outfit leading-none">Conectarapak</span>
+            <span className="text-[10px] font-mono text-teal-600 font-bold tracking-[0.4em] uppercase">Intelligence Hub</span>
           </div>
         </Link>
         
@@ -122,10 +122,10 @@ const Navbar = () => {
           <NavLink to="/network" active={isActive('/network')}>Red</NavLink>
           <Link 
             to="/assistant" 
-            className="ml-12 px-10 py-4 bg-teal-500/10 border border-teal-500/30 text-[11px] font-mono uppercase tracking-[0.5em] font-black hover:bg-teal-500 hover:text-white transition-all duration-500 glow-teal relative group overflow-hidden"
+            className="ml-12 px-10 py-4 bg-teal-600/10 border border-teal-600/30 text-[11px] font-mono text-teal-600 uppercase tracking-[0.5em] font-black hover:bg-teal-600 hover:text-white transition-all duration-500 shadow-sm relative group overflow-hidden"
           >
             <span className="relative z-10">Núcleo Asesor</span>
-            <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+            <div className="absolute inset-0 bg-teal-600 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
           </Link>
         </div>
       </div>
@@ -136,7 +136,7 @@ const Navbar = () => {
 function App() {
   return (
     <Router>
-      <div className="min-h-screen flex flex-col selection:bg-teal-500 selection:text-white">
+      <div className="min-h-screen flex flex-col selection:bg-teal-600 selection:text-white bg-slate-50">
         <MarketTicker />
         <Navbar />
         <main className="flex-grow">
@@ -151,36 +151,36 @@ function App() {
           </Routes>
         </main>
         
-        <footer className="bg-[#0f172a] text-white pt-48 pb-16 px-8 md:px-16 border-t border-white/5">
+        <footer className="bg-white text-slate-900 pt-48 pb-16 px-8 md:px-16 border-t border-slate-200">
           <div className="max-w-screen-2xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-24 mb-32">
               <div className="lg:col-span-7">
                 <h2 className="text-[10vw] lg:text-[110px] font-black leading-[0.9] tracking-tighter uppercase font-outfit">
                   TARAPACÁ <br />
-                  <span className="text-teal-500">AL MUNDO</span>
+                  <span className="text-teal-600">AL MUNDO</span>
                 </h2>
               </div>
 
-              <div className="lg:col-span-5 border-l border-white/5 pl-16 space-y-16">
+              <div className="lg:col-span-5 border-l border-slate-100 pl-16 space-y-16">
                 <div className="grid grid-cols-2 gap-12">
                   <div className="space-y-6">
-                    <span className="text-[10px] font-mono text-teal-500 uppercase tracking-widest font-black">Navegación</span>
+                    <span className="text-[10px] font-mono text-teal-600 uppercase tracking-widest font-black">Navegación</span>
                     <nav className="flex flex-col space-y-4">
-                      <Link to="/" className="text-xs font-light hover:text-teal-400 transition-all uppercase tracking-widest">Protocolo</Link>
-                      <Link to="/projects" className="text-xs font-light hover:text-teal-400 transition-all uppercase tracking-widest">Proyectos</Link>
-                      <Link to="/network" className="text-xs font-light hover:text-teal-400 transition-all uppercase tracking-widest">Red</Link>
+                      <Link to="/" className="text-xs font-light text-slate-600 hover:text-teal-600 transition-all uppercase tracking-widest">Protocolo</Link>
+                      <Link to="/projects" className="text-xs font-light text-slate-600 hover:text-teal-600 transition-all uppercase tracking-widest">Proyectos</Link>
+                      <Link to="/network" className="text-xs font-light text-slate-600 hover:text-teal-600 transition-all uppercase tracking-widest">Red</Link>
                     </nav>
                   </div>
                   <div className="space-y-6">
-                    <span className="text-[10px] font-mono text-amber-500 uppercase tracking-widest font-black">Social</span>
-                    <div className="flex space-x-6 text-xl">
-                      <a href="#" className="hover:text-teal-500 transition-all"><i className="fab fa-linkedin"></i></a>
-                      <a href="#" className="hover:text-teal-500 transition-all"><i className="fab fa-x-twitter"></i></a>
+                    <span className="text-[10px] font-mono text-amber-600 uppercase tracking-widest font-black">Social</span>
+                    <div className="flex space-x-6 text-xl text-slate-400">
+                      <a href="#" className="hover:text-teal-600 transition-all"><i className="fab fa-linkedin"></i></a>
+                      <a href="#" className="hover:text-teal-600 transition-all"><i className="fab fa-x-twitter"></i></a>
                     </div>
                   </div>
                 </div>
                 
-                <div className="pt-12 border-t border-white/5">
+                <div className="pt-12 border-t border-slate-100">
                   <p className="text-[10px] font-mono text-slate-500 leading-relaxed uppercase tracking-[0.2em]">
                     ConecTarapak consolida la innovación del norte chileno mediante IA y capital global. Transformamos el desierto en un laboratorio de futuro sostenible.
                   </p>
@@ -189,20 +189,20 @@ function App() {
             </div>
 
             <div className="relative pt-32 pb-16 overflow-visible">
-              <div className="stretched-text text-[7.2vw] font-black text-teal-500/10 select-none pointer-events-none font-outfit uppercase tracking-widest">
+              <div className="stretched-text text-[7.2vw] font-black text-slate-200 select-none pointer-events-none font-outfit uppercase tracking-widest">
                 ConecTarapak
               </div>
             </div>
 
-            <div className="mt-12 flex flex-col md:flex-row justify-between items-center gap-8 text-[9px] font-mono text-slate-500 uppercase tracking-[0.4em]">
+            <div className="mt-12 flex flex-col md:flex-row justify-between items-center gap-8 text-[9px] font-mono text-slate-400 uppercase tracking-[0.4em]">
               <div className="flex items-center gap-6">
                 <span>© 2024 HUB GLOBAL CONECTARAPAK</span>
-                <span className="text-white/10">|</span>
-                <span className="text-amber-600/50">ESTADO DEL SISTEMA: ÓPTIMO</span>
+                <span className="text-slate-100">|</span>
+                <span className="text-amber-600/70">ESTADO DEL SISTEMA: ÓPTIMO</span>
               </div>
               <div className="flex gap-12">
-                <a href="#" className="hover:text-teal-400">CUMPLIMIENTO LEGAL</a>
-                <a href="#" className="hover:text-teal-400">REGLAMENTOS DE RED</a>
+                <a href="#" className="hover:text-teal-600">CUMPLIMIENTO LEGAL</a>
+                <a href="#" className="hover:text-teal-600">REGLAMENTOS DE RED</a>
               </div>
             </div>
           </div>

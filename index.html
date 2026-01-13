@@ -10,11 +10,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;600;900&family=Outfit:wght@100;300;600;900&display=swap" rel="stylesheet">
   <style>
     :root { 
-      --accent: #14b8a6; /* Teal Eléctrico */
-      --accent-alt: #f59e0b; /* Cobre Atacama */
-      --accent-glow: rgba(20, 184, 166, 0.3);
-      --bg-dark: #0f172a; /* Azul Pizarra Profundo */
-      --panel-bg: rgba(30, 41, 59, 0.7); 
+      --accent: #0d9488; /* Teal 600 */
+      --accent-alt: #b45309; /* Amber 700 */
+      --accent-glow: rgba(13, 148, 136, 0.1);
+      --bg-dark: #f8fafc; /* Slate 50 - Background Light */
+      --panel-bg: rgba(255, 255, 255, 0.7); 
+      --text-main: #0f172a; /* Slate 900 */
+      --text-muted: #64748b; /* Slate 500 */
     }
     
     html, body {
@@ -26,7 +28,7 @@
 
     body { 
       font-family: 'Inter', sans-serif; 
-      color: #f8fafc;
+      color: var(--text-main);
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
@@ -37,10 +39,10 @@
       content: '';
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
-      background: radial-gradient(circle at 50% -20%, #134e4a 0%, transparent 50%),
-                  radial-gradient(circle at 0% 100%, #1e1b4b 0%, transparent 30%);
+      background: radial-gradient(circle at 50% -20%, rgba(20, 184, 166, 0.15) 0%, transparent 50%),
+                  radial-gradient(circle at 0% 100%, rgba(245, 158, 11, 0.05) 0%, transparent 30%);
       z-index: -1;
-      opacity: 0.5;
+      opacity: 0.8;
     }
 
     @keyframes ticker {
@@ -70,13 +72,13 @@
 
     .aero-panel {
       background: var(--panel-bg);
-      backdrop-filter: blur(40px);
+      backdrop-filter: blur(20px);
       border: 1px solid rgba(20, 184, 166, 0.1);
-      box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.05);
     }
 
     .tech-frame {
-      border: 1px solid rgba(20, 184, 166, 0.15);
+      border: 1px solid rgba(20, 184, 166, 0.1);
       position: relative;
     }
     .tech-frame::before {
@@ -102,7 +104,7 @@
     }
     .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
-    .glow-teal { box-shadow: 0 0 40px rgba(20, 184, 166, 0.1); }
+    .glow-teal { box-shadow: 0 10px 40px rgba(20, 184, 166, 0.1); }
 
     .stretched-text {
       display: block;

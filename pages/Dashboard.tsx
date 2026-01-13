@@ -55,31 +55,31 @@ const Dashboard: React.FC = () => {
       {/* Header - Mi Hub */}
       <header className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8">
         <div className="space-y-2">
-          <h1 className="text-5xl font-black font-outfit text-amber-500 uppercase tracking-tighter">Mi Hub - {role}</h1>
-          <p className="text-slate-400 text-lg">
-            Bienvenido, <span className="text-white font-bold">Gean Karlo</span>. Aquí comienza tu viaje de la idea al impacto.
+          <h1 className="text-5xl font-black font-outfit text-amber-600 uppercase tracking-tighter">Mi Hub - {role}</h1>
+          <p className="text-slate-500 text-lg">
+            Bienvenido, <span className="text-slate-900 font-bold">Gean Karlo</span>. Aquí comienza tu viaje de la idea al impacto.
           </p>
         </div>
 
         <div className="flex flex-wrap items-center gap-4">
-          <div className="aero-panel p-1.5 flex rounded-full border-white/10 shadow-xl">
+          <div className="aero-panel p-1.5 flex rounded-full border-slate-200 bg-white/50 shadow-sm">
             <button 
               onClick={() => setRole('Emprendedor')}
-              className={`px-8 py-3 rounded-full text-[11px] font-mono uppercase tracking-widest font-black transition-all flex items-center gap-3 ${role === 'Emprendedor' ? 'bg-teal-500 text-white shadow-[0_0_20px_#14b8a6]' : 'text-slate-400 hover:text-white'}`}
+              className={`px-8 py-3 rounded-full text-[11px] font-mono uppercase tracking-widest font-black transition-all flex items-center gap-3 ${role === 'Emprendedor' ? 'bg-teal-600 text-white shadow-md' : 'text-slate-500 hover:text-slate-900'}`}
             >
               <i className="fas fa-briefcase"></i>
               Emprendedor
             </button>
             <button 
               onClick={() => setRole('Donador')}
-              className={`px-8 py-3 rounded-full text-[11px] font-mono uppercase tracking-widest font-black transition-all flex items-center gap-3 ${role === 'Donador' ? 'bg-[#1e293b] text-white' : 'text-slate-400 hover:text-white'}`}
+              className={`px-8 py-3 rounded-full text-[11px] font-mono uppercase tracking-widest font-black transition-all flex items-center gap-3 ${role === 'Donador' ? 'bg-slate-800 text-white shadow-md' : 'text-slate-500 hover:text-slate-900'}`}
             >
               <i className="fas fa-heart"></i>
               Donador
             </button>
           </div>
           
-          <Link to="/onboarding" className="aero-panel px-8 py-4 bg-white text-black text-[11px] font-mono uppercase tracking-widest font-black hover:bg-teal-500 hover:text-white transition-all shadow-xl flex items-center gap-3">
+          <Link to="/onboarding" className="aero-panel px-8 py-4 bg-slate-900 text-white text-[11px] font-mono uppercase tracking-widest font-black hover:bg-teal-600 transition-all shadow-md flex items-center gap-3">
             <i className="fas fa-plus"></i>
             Nuevo Proyecto
           </Link>
@@ -89,18 +89,18 @@ const Dashboard: React.FC = () => {
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {[
-          { icon: 'fa-chart-line', label: 'Proyectos Activos', val: '2', color: 'text-sky-400', bg: 'bg-sky-400/10' },
-          { icon: 'fa-dollar-sign', label: 'Total Objetivo', val: '$1.800.000', color: 'text-amber-400', bg: 'bg-amber-400/10' },
-          { icon: 'fa-users', label: 'Proyectos Totales', val: '2', color: 'text-teal-400', bg: 'bg-teal-400/10' },
-          { icon: 'fa-medal', label: 'Logros', val: '2/4', color: 'text-rose-400', bg: 'bg-rose-400/10' }
+          { icon: 'fa-chart-line', label: 'Proyectos Activos', val: '2', color: 'text-sky-600', bg: 'bg-sky-50' },
+          { icon: 'fa-dollar-sign', label: 'Total Objetivo', val: '$1.800.000', color: 'text-amber-600', bg: 'bg-amber-50' },
+          { icon: 'fa-users', label: 'Proyectos Totales', val: '2', color: 'text-teal-600', bg: 'bg-teal-50' },
+          { icon: 'fa-medal', label: 'Logros', val: '2/4', color: 'text-rose-600', bg: 'bg-rose-50' }
         ].map((stat, i) => (
-          <div key={i} className="aero-panel p-8 flex items-center gap-6 tech-frame hover:translate-y-[-4px] transition-transform">
-            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-xl ${stat.bg} ${stat.color} border border-white/5`}>
+          <div key={i} className="aero-panel p-8 flex items-center gap-6 tech-frame hover:translate-y-[-4px] transition-transform bg-white/80">
+            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-xl ${stat.bg} ${stat.color} border border-slate-100`}>
               <i className={`fas ${stat.icon}`}></i>
             </div>
             <div>
-              <p className="text-[10px] font-mono text-slate-500 uppercase tracking-widest font-black mb-1">{stat.label}</p>
-              <p className="text-3xl font-black font-outfit leading-none">{stat.val}</p>
+              <p className="text-[10px] font-mono text-slate-400 uppercase tracking-widest font-black mb-1">{stat.label}</p>
+              <p className="text-3xl font-black font-outfit text-slate-900 leading-none">{stat.val}</p>
             </div>
           </div>
         ))}
@@ -108,78 +108,77 @@ const Dashboard: React.FC = () => {
 
       {/* Main Content Area */}
       <div className="space-y-8 pt-8">
-        <div className="flex border-b border-white/5 gap-2">
+        <div className="flex border-b border-slate-200 gap-2">
           {['Mis Proyectos', 'Contribuciones', 'Logros'].map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab as any)}
-              className={`px-10 py-4 text-[11px] font-mono uppercase tracking-[0.3em] font-black transition-all relative ${activeTab === tab ? 'text-teal-400 bg-teal-500/5' : 'text-slate-500 hover:text-slate-300'}`}
+              className={`px-10 py-4 text-[11px] font-mono uppercase tracking-[0.3em] font-black transition-all relative ${activeTab === tab ? 'text-teal-600 bg-teal-50/50' : 'text-slate-400 hover:text-slate-600'}`}
             >
               {tab}
-              {activeTab === tab && <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-teal-500 shadow-[0_0_10px_#14b8a6]"></div>}
+              {activeTab === tab && <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-teal-600 shadow-[0_0_10px_rgba(20,184,166,0.3)]"></div>}
             </button>
           ))}
         </div>
 
         <div className="grid grid-cols-1 gap-8">
           {activeTab === 'Mis Proyectos' && MY_PROJECTS.map((project) => (
-            <div key={project.id} className="aero-panel p-10 tech-frame bg-white/[0.02] flex flex-col md:flex-row gap-12 group transition-all">
-              <div className="md:w-64 h-48 overflow-hidden rounded-xl border border-white/5 shrink-0">
+            <div key={project.id} className="aero-panel p-10 tech-frame bg-white/80 flex flex-col md:flex-row gap-12 group transition-all">
+              <div className="md:w-64 h-48 overflow-hidden rounded-xl border border-slate-100 shrink-0">
                 <img src={project.image} alt={project.title} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
               </div>
 
               <div className="flex-grow space-y-6">
                 <div className="flex justify-between items-start">
                   <div className="space-y-1">
-                    <h3 className="text-4xl font-black font-outfit uppercase tracking-tighter leading-none">{project.title}</h3>
+                    <h3 className="text-4xl font-black font-outfit text-slate-900 uppercase tracking-tighter leading-none">{project.title}</h3>
                     <p className="text-slate-500 text-lg font-light">{project.description}</p>
                   </div>
-                  <span className="bg-teal-500/10 text-teal-500 px-4 py-1.5 rounded-full text-[10px] font-mono font-black uppercase tracking-widest border border-teal-500/20">
+                  <span className="bg-teal-50 text-teal-600 px-4 py-1.5 rounded-full text-[10px] font-mono font-black uppercase tracking-widest border border-teal-100">
                     Activo
                   </span>
                 </div>
 
                 <div className="flex items-center gap-4">
-                  <span className="bg-sky-500 text-white px-5 py-1.5 rounded-full text-[9px] font-mono font-black uppercase tracking-[0.3em]">
+                  <span className="bg-sky-50 text-sky-600 px-5 py-1.5 rounded-full text-[9px] font-mono font-black uppercase tracking-[0.3em] border border-sky-100">
                     {project.category}
                   </span>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-10 pt-4">
                   <div className="space-y-3">
-                    <p className="text-[10px] font-mono text-slate-500 uppercase tracking-widest font-black">Progreso</p>
-                    <div className="h-4 bg-slate-900 rounded-full overflow-hidden flex shadow-inner border border-white/5">
+                    <p className="text-[10px] font-mono text-slate-400 uppercase tracking-widest font-black">Progreso</p>
+                    <div className="h-4 bg-slate-100 rounded-full overflow-hidden flex shadow-inner border border-slate-200">
                       <div 
-                        className="h-full bg-amber-500 shadow-[0_0_15px_rgba(245,158,11,0.5)] transition-all duration-1000" 
+                        className="h-full bg-amber-500 shadow-sm transition-all duration-1000" 
                         style={{ width: `${(project.raised/project.goal) * 100}%` }}
                       ></div>
-                      <div className="flex-grow bg-sky-500 opacity-30"></div>
                     </div>
-                    <p className="text-sm font-black font-mono text-slate-300">
-                      ${project.raised.toLocaleString()} / <span className="text-slate-600">${project.goal.toLocaleString()}</span>
+                    <p className="text-sm font-black font-mono text-slate-700">
+                      ${project.raised.toLocaleString()} / <span className="text-slate-400">${project.goal.toLocaleString()}</span>
                     </p>
                   </div>
 
                   <div className="space-y-1">
-                    <p className="text-[10px] font-mono text-slate-500 uppercase tracking-widest font-black">Contribuyentes</p>
-                    <p className="text-3xl font-black font-outfit">{project.investors}</p>
+                    <p className="text-[10px] font-mono text-slate-400 uppercase tracking-widest font-black">Contribuyentes</p>
+                    <p className="text-3xl font-black font-outfit text-slate-900">{project.investors}</p>
                   </div>
 
                   <div className="space-y-1">
-                    <p className="text-[10px] font-mono text-slate-500 uppercase tracking-widest font-black">Días restantes</p>
-                    <p className="text-3xl font-black font-outfit">{project.daysLeft}</p>
+                    <p className="text-[10px] font-mono text-slate-400 uppercase tracking-widest font-black">Días restantes</p>
+                    <p className="text-3xl font-black font-outfit text-slate-900">{project.daysLeft}</p>
                   </div>
                 </div>
 
                 <div className="flex gap-4 pt-6">
                   <button 
                     onClick={() => navigate(`/project-detail/${project.id}`)}
-                    className="px-10 py-4 bg-white/5 border border-white/10 text-white text-[11px] font-mono uppercase tracking-widest font-black hover:bg-teal-500 hover:text-white hover:border-teal-500 transition-all flex items-center gap-3"
+                    className="px-10 py-4 bg-slate-50 border border-slate-200 text-slate-700 text-[11px] font-mono uppercase tracking-widest font-black hover:bg-teal-600 hover:text-white hover:border-teal-600 transition-all flex items-center gap-3"
                   >
                     <i className="fas fa-eye"></i>
-                    Ver
+                    Ver Lab
                   </button>
-                  <button className="px-10 py-4 bg-white/5 border border-white/10 text-white text-[11px] font-mono uppercase tracking-widest font-black hover:bg-amber-500 hover:text-white hover:border-amber-500 transition-all flex items-center gap-3">
+                  <button className="px-10 py-4 bg-slate-50 border border-slate-200 text-slate-700 text-[11px] font-mono uppercase tracking-widest font-black hover:bg-amber-600 hover:text-white hover:border-amber-600 transition-all flex items-center gap-3">
                     <i className="fas fa-pencil"></i>
                     Editar
                   </button>
@@ -189,7 +188,7 @@ const Dashboard: React.FC = () => {
           ))}
 
           {activeTab !== 'Mis Proyectos' && (
-            <div className="py-24 text-center space-y-4 opacity-30">
+            <div className="py-24 text-center space-y-4 opacity-30 text-slate-400">
               <i className="fas fa-folder-open text-6xl"></i>
               <p className="text-xl font-mono uppercase tracking-widest">Aún no hay datos en esta sección</p>
             </div>

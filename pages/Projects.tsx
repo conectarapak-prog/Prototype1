@@ -178,21 +178,21 @@ const Projects: React.FC = () => {
   return (
     <div className="max-w-screen-2xl mx-auto px-8 md:px-16 lg:px-24 py-24 min-h-screen">
       
-      <header className="reveal flex flex-col space-y-16 border-b border-sky-500/10 pb-20 mb-24">
+      <header className="reveal flex flex-col space-y-16 border-b border-teal-600/10 pb-20 mb-24">
         <div className="flex flex-col md:flex-row justify-between items-end gap-12">
           <div className="space-y-6">
             <div className="flex items-center gap-4">
-              <div className="w-2 h-2 rounded-full bg-sky-500 animate-ping"></div>
-              <span className="text-[12px] font-mono text-sky-500 uppercase tracking-[0.6em] font-black">Capital de Impacto Regional</span>
+              <div className="w-2 h-2 rounded-full bg-teal-600 animate-ping"></div>
+              <span className="text-[12px] font-mono text-teal-600 uppercase tracking-[0.6em] font-black">Capital de Impacto Regional</span>
             </div>
-            <h1 className="text-6xl md:text-8xl font-black tracking-tighter uppercase font-outfit leading-none">
-              Proyectos <br/><span className="text-white/20 italic">de Inversión</span>
+            <h1 className="text-6xl md:text-8xl font-black tracking-tighter uppercase font-outfit leading-none text-slate-900">
+              Proyectos <br/><span className="text-slate-200 italic">de Inversión</span>
             </h1>
           </div>
           
           <div className="flex flex-col gap-6 w-full md:w-auto">
              <div className="flex justify-end">
-                <Link to="/onboarding" className="px-10 py-5 bg-teal-500 text-white font-mono text-[11px] uppercase tracking-[0.5em] font-black hover:bg-white hover:text-black transition-all glow-teal shadow-2xl flex items-center gap-4 group">
+                <Link to="/onboarding" className="px-10 py-5 bg-teal-600 text-white font-mono text-[11px] uppercase tracking-[0.5em] font-black hover:bg-slate-900 transition-all shadow-md flex items-center gap-4 group">
                   <i className="fas fa-plus group-hover:rotate-90 transition-transform"></i>
                   Registrar Activo
                 </Link>
@@ -200,18 +200,18 @@ const Projects: React.FC = () => {
              
              <div className="flex gap-4">
                 <div className="relative group flex-grow md:flex-none">
-                    <i className="fas fa-search absolute left-6 top-1/2 -translate-y-1/2 text-sky-900"></i>
+                    <i className="fas fa-search absolute left-6 top-1/2 -translate-y-1/2 text-slate-400"></i>
                     <input 
                       type="text" 
                       placeholder="BUSCAR PROYECTO..." 
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="bg-slate-900/40 border border-sky-500/10 focus:border-sky-500/50 focus:outline-none px-16 py-5 text-[11px] font-mono tracking-[0.2em] w-full md:w-[400px] uppercase text-white"
+                      className="bg-white border border-slate-200 focus:border-teal-500 focus:outline-none px-16 py-5 text-[11px] font-mono tracking-[0.2em] w-full md:w-[400px] uppercase text-slate-900 shadow-sm"
                     />
                 </div>
                 <button 
                   onClick={() => setShowFilters(!showFilters)}
-                  className={`px-8 flex items-center gap-4 font-mono text-[11px] uppercase tracking-widest transition-all ${showFilters ? 'bg-teal-500 text-white border-teal-500' : 'bg-white/5 border border-white/10 text-slate-400'}`}
+                  className={`px-8 flex items-center gap-4 font-mono text-[11px] uppercase tracking-widest transition-all ${showFilters ? 'bg-teal-600 text-white border-teal-600' : 'bg-white border border-slate-200 text-slate-500 hover:border-teal-500'}`}
                 >
                   <i className="fas fa-sliders"></i>
                   Terminal de Filtros
@@ -222,28 +222,28 @@ const Projects: React.FC = () => {
 
         {/* Terminal de Filtros Desplegable */}
         <div className={`overflow-hidden transition-all duration-700 ease-in-out ${showFilters ? 'max-h-[600px] opacity-100' : 'max-h-0 opacity-0'}`}>
-          <div className="aero-panel p-10 grid grid-cols-1 md:grid-cols-3 gap-12 border-teal-500/20 tech-frame mb-12 shadow-2xl">
+          <div className="aero-panel p-10 grid grid-cols-1 md:grid-cols-3 gap-12 border-teal-600/20 tech-frame mb-12 shadow-md bg-white/90">
             <div className="space-y-4">
-              <span className="text-[10px] font-mono text-teal-500 uppercase tracking-widest font-black block">Matriz de Riesgo</span>
+              <span className="text-[10px] font-mono text-teal-600 uppercase tracking-widest font-black block">Matriz de Riesgo</span>
               <div className="flex flex-wrap gap-2">
                 {['Todos', 'Bajo', 'Moderado', 'Alto'].map(r => (
-                  <button key={r} onClick={() => setRiskFilter(r)} className={`px-4 py-2 text-[9px] font-mono border uppercase transition-all ${riskFilter === r ? 'bg-teal-500 border-teal-500 text-white' : 'border-white/5 text-slate-500 hover:border-white/20'}`}>{r}</button>
+                  <button key={r} onClick={() => setRiskFilter(r)} className={`px-4 py-2 text-[9px] font-mono border uppercase transition-all ${riskFilter === r ? 'bg-teal-600 border-teal-600 text-white' : 'border-slate-200 text-slate-500 hover:border-teal-500'}`}>{r}</button>
                 ))}
               </div>
             </div>
             <div className="space-y-4">
-              <span className="text-[10px] font-mono text-teal-500 uppercase tracking-widest font-black block">Proyección Retorno</span>
+              <span className="text-[10px] font-mono text-teal-600 uppercase tracking-widest font-black block">Proyección Retorno</span>
               <div className="flex flex-wrap gap-2">
                 {['Todos', '<15%', '15-20%', '>20%'].map(r => (
-                  <button key={r} onClick={() => setReturnFilter(r)} className={`px-4 py-2 text-[9px] font-mono border uppercase transition-all ${returnFilter === r ? 'bg-teal-500 border-teal-500 text-white' : 'border-white/5 text-slate-500 hover:border-white/20'}`}>{r}</button>
+                  <button key={r} onClick={() => setReturnFilter(r)} className={`px-4 py-2 text-[9px] font-mono border uppercase transition-all ${returnFilter === r ? 'bg-teal-600 border-teal-600 text-white' : 'border-slate-200 text-slate-500 hover:border-teal-500'}`}>{r}</button>
                 ))}
               </div>
             </div>
             <div className="space-y-4">
-              <span className="text-[10px] font-mono text-teal-500 uppercase tracking-widest font-black block">Etapa Desarrollo</span>
+              <span className="text-[10px] font-mono text-teal-600 uppercase tracking-widest font-black block">Etapa Desarrollo</span>
               <div className="flex flex-wrap gap-2">
                 {['Todos', 'Semilla', 'Validación', 'Consolidado'].map(s => (
-                  <button key={s} onClick={() => setStageFilter(s)} className={`px-4 py-2 text-[9px] font-mono border uppercase transition-all ${stageFilter === s ? 'bg-teal-500 border-teal-500 text-white' : 'border-white/5 text-slate-500 hover:border-white/20'}`}>{s}</button>
+                  <button key={s} onClick={() => setStageFilter(s)} className={`px-4 py-2 text-[9px] font-mono border uppercase transition-all ${stageFilter === s ? 'bg-teal-600 border-teal-600 text-white' : 'border-slate-200 text-slate-500 hover:border-teal-500'}`}>{s}</button>
                 ))}
               </div>
             </div>
@@ -255,50 +255,50 @@ const Projects: React.FC = () => {
         {filteredProjects.map((p, idx) => (
           <div 
             key={p.id} 
-            className="reveal aero-panel tech-frame group hover:border-teal-500/50 transition-all duration-700 cursor-pointer overflow-hidden flex flex-col" 
+            className="reveal aero-panel tech-frame group hover:border-teal-600/50 transition-all duration-700 cursor-pointer overflow-hidden flex flex-col bg-white" 
             style={{ transitionDelay: `${idx * 100}ms` }}
             onClick={() => { setSelectedProject(p); setInvAmount(p.minInvestment); }}
           >
             <div className="relative aspect-[16/9] overflow-hidden">
               <img src={p.image} alt={p.title} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 scale-100 group-hover:scale-110" />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
               <div className="absolute top-6 left-6 flex flex-col gap-2">
-                <span className="bg-teal-500 text-[9px] font-mono px-3 py-1.5 uppercase font-black tracking-widest shadow-2xl">{p.category.split('/')[0]}</span>
-                <span className={`text-[9px] font-mono px-3 py-1.5 uppercase font-black tracking-widest shadow-2xl ${p.riskLevel === 'Alto' ? 'bg-rose-600' : p.riskLevel === 'Moderado' ? 'bg-amber-600' : 'bg-green-600'}`}>RIESGO_{p.riskLevel.toUpperCase()}</span>
+                <span className="bg-teal-600 text-white text-[9px] font-mono px-3 py-1.5 uppercase font-black tracking-widest shadow-xl">{p.category.split('/')[0]}</span>
+                <span className={`text-white text-[9px] font-mono px-3 py-1.5 uppercase font-black tracking-widest shadow-xl ${p.riskLevel === 'Alto' ? 'bg-rose-600' : p.riskLevel === 'Moderado' ? 'bg-amber-600' : 'bg-emerald-600'}`}>RIESGO_{p.riskLevel.toUpperCase()}</span>
               </div>
             </div>
 
             <div className="p-10 flex-grow flex flex-col space-y-8">
               <div className="space-y-2">
-                <h3 className="text-3xl font-black uppercase font-outfit tracking-tighter group-hover:text-teal-400 transition-colors leading-none">{p.title}</h3>
+                <h3 className="text-3xl font-black uppercase font-outfit tracking-tighter text-slate-900 group-hover:text-teal-600 transition-colors leading-none">{p.title}</h3>
                 <div className="flex justify-between items-center">
                     <p className="text-[11px] font-mono text-slate-500 uppercase tracking-widest font-black">Por {p.creator}</p>
-                    <span className="text-[11px] font-mono text-teal-500 font-bold">{p.returnEstimate}</span>
+                    <span className="text-[11px] font-mono text-teal-600 font-bold">{p.returnEstimate}</span>
                 </div>
               </div>
 
-              <div className="pt-6 border-t border-white/5 space-y-6">
+              <div className="pt-6 border-t border-slate-100 space-y-6">
                 <div className="flex justify-between items-end">
                    <div className="space-y-1">
-                      <span className="text-[9px] font-mono text-slate-600 uppercase font-black tracking-widest">Recaudado</span>
-                      <p className="text-2xl font-black font-outfit tracking-tighter">${p.raised.toLocaleString()}</p>
+                      <span className="text-[9px] font-mono text-slate-400 uppercase font-black tracking-widest">Recaudado</span>
+                      <p className="text-2xl font-black font-outfit tracking-tighter text-slate-900">${p.raised.toLocaleString()}</p>
                    </div>
                    <div className="text-right space-y-1">
-                      <span className="text-[9px] font-mono text-slate-600 uppercase font-black tracking-widest">Inversores</span>
-                      <p className="text-2xl font-black font-outfit tracking-tighter text-teal-500">{p.investors}</p>
+                      <span className="text-[9px] font-mono text-slate-400 uppercase font-black tracking-widest">Inversores</span>
+                      <p className="text-2xl font-black font-outfit tracking-tighter text-teal-600">{p.investors}</p>
                    </div>
                 </div>
 
                 <div className="space-y-2">
-                  <div className="h-1 bg-slate-900 w-full overflow-hidden">
+                  <div className="h-1 bg-slate-100 w-full overflow-hidden rounded-full shadow-inner">
                     <div 
-                      className="h-full bg-teal-500 transition-all duration-1000" 
+                      className="h-full bg-teal-600 transition-all duration-1000" 
                       style={{ width: `${Math.min((p.raised/p.goal)*100, 100)}%` }}
                     ></div>
                   </div>
                   <div className="flex justify-between text-[9px] font-mono font-black uppercase tracking-widest">
-                    <span className="text-teal-800">{((p.raised/p.goal)*100).toFixed(0)}% SINCRO</span>
-                    <span className="text-slate-700">OBJ: ${p.goal.toLocaleString()}</span>
+                    <span className="text-teal-600">{((p.raised/p.goal)*100).toFixed(0)}% SINCRO</span>
+                    <span className="text-slate-400">OBJ: ${p.goal.toLocaleString()}</span>
                   </div>
                 </div>
               </div>
@@ -308,91 +308,91 @@ const Projects: React.FC = () => {
       </div>
 
       {selectedProject && (
-        <div className="fixed inset-0 z-[100] bg-slate-950/95 flex items-center justify-center p-6 md:p-12 backdrop-blur-3xl animate-in fade-in duration-500">
-          <div className="aero-panel w-full max-w-[1500px] h-[90vh] flex flex-col relative overflow-hidden border-teal-500/30 tech-frame">
+        <div className="fixed inset-0 z-[100] bg-slate-900/40 flex items-center justify-center p-6 md:p-12 backdrop-blur-sm animate-in fade-in duration-500">
+          <div className="aero-panel w-full max-w-[1500px] h-[90vh] flex flex-col relative overflow-hidden border-teal-600/30 tech-frame bg-white">
             
             {protocolStatus === 'processing' && (
-              <div className="absolute inset-0 z-[120] bg-slate-950/90 flex flex-col items-center justify-center space-y-8 backdrop-blur-2xl">
-                <div className="w-20 h-20 border-2 border-teal-500 border-t-transparent rounded-full animate-spin"></div>
-                <p className="text-[11px] font-mono text-teal-500 uppercase tracking-[0.8em] font-black animate-pulse">AUTENTICANDO TRANSACCIÓN...</p>
+              <div className="absolute inset-0 z-[120] bg-white/90 flex flex-col items-center justify-center space-y-8 backdrop-blur-md">
+                <div className="w-20 h-20 border-2 border-teal-600 border-t-transparent rounded-full animate-spin"></div>
+                <p className="text-[11px] font-mono text-teal-600 uppercase tracking-[0.8em] font-black animate-pulse">AUTENTICANDO TRANSACCIÓN...</p>
               </div>
             )}
 
-            <div className="p-10 border-b border-white/5 flex justify-between items-center bg-[#0f172a]/60 shrink-0">
+            <div className="p-10 border-b border-slate-100 flex justify-between items-center bg-slate-50/50 shrink-0">
               <div className="space-y-2">
-                <span className="text-[10px] font-mono text-teal-500 uppercase tracking-[0.4em] font-black">Auditoría Regional Activa</span>
-                <h2 className="text-4xl md:text-5xl font-black uppercase font-outfit leading-none tracking-tighter">{selectedProject.title}</h2>
+                <span className="text-[10px] font-mono text-teal-600 uppercase tracking-[0.4em] font-black">Auditoría Regional Activa</span>
+                <h2 className="text-4xl md:text-5xl font-black uppercase font-outfit text-slate-900 leading-none tracking-tighter">{selectedProject.title}</h2>
               </div>
-              <button onClick={() => setSelectedProject(null)} className="w-12 h-12 border border-white/10 hover:border-teal-500 transition-all text-xl">✕</button>
+              <button onClick={() => setSelectedProject(null)} className="w-12 h-12 border border-slate-200 hover:border-teal-600 transition-all text-xl text-slate-400 hover:text-teal-600">✕</button>
             </div>
 
             <div className="flex-grow flex flex-col lg:flex-row overflow-hidden">
               <div className="flex-grow overflow-y-auto p-12 md:p-16 space-y-20 custom-scrollbar">
                 <div className="grid grid-cols-1 xl:grid-cols-2 gap-16">
                   <div className="space-y-12">
-                    <section className="tech-frame p-8 bg-white/[0.01] space-y-6">
-                      <h4 className="text-[11px] font-mono text-teal-500 uppercase tracking-[0.6em] font-black border-b border-white/5 pb-4">Tesis_Estratégica</h4>
-                      <p className="text-lg font-light leading-relaxed text-slate-300 italic">"{selectedProject.description}"</p>
+                    <section className="tech-frame p-8 bg-slate-50/50 space-y-6">
+                      <h4 className="text-[11px] font-mono text-teal-600 uppercase tracking-[0.6em] font-black border-b border-slate-100 pb-4">Tesis_Estratégica</h4>
+                      <p className="text-lg font-light leading-relaxed text-slate-600 italic">"{selectedProject.description}"</p>
                     </section>
-                    <section className="tech-frame p-8 bg-slate-900/40 space-y-10">
-                      <h4 className="text-[11px] font-mono text-teal-500 uppercase tracking-[0.6em] font-black border-b border-white/5 pb-4">Hoja_de_Ruta_Fisica</h4>
+                    <section className="tech-frame p-8 bg-slate-100/30 space-y-10">
+                      <h4 className="text-[11px] font-mono text-teal-600 uppercase tracking-[0.6em] font-black border-b border-slate-100 pb-4">Hoja_de_Ruta_Fisica</h4>
                       <div className="space-y-6">
                         {selectedProject.milestones.map((m, i) => (
-                          <div key={i} className={`flex items-center justify-between p-5 border transition-all ${m.completed ? 'border-teal-500/20 bg-teal-500/5' : 'border-white/5 opacity-40'}`}>
+                          <div key={i} className={`flex items-center justify-between p-5 border transition-all ${m.completed ? 'border-teal-600/20 bg-teal-50' : 'border-slate-100 opacity-40'}`}>
                             <div className="flex items-center gap-4">
                               <span className="text-[9px] font-mono text-teal-800 font-black">0{i+1}</span>
-                              <span className="text-xs font-black uppercase tracking-widest">{m.label}</span>
+                              <span className="text-xs font-black uppercase tracking-widest text-slate-900">{m.label}</span>
                             </div>
-                            <span className="text-[10px] font-mono text-teal-600">${m.amount.toLocaleString()}</span>
+                            <span className="text-[10px] font-mono text-teal-600 font-black">${m.amount.toLocaleString()}</span>
                           </div>
                         ))}
                       </div>
                     </section>
                   </div>
                   <div className="space-y-8">
-                     <img src={selectedProject.image} className="w-full h-80 object-cover grayscale opacity-50 tech-frame" alt="" />
+                     <img src={selectedProject.image} className="w-full h-80 object-cover grayscale opacity-80 tech-frame" alt="" />
                      <div className="grid grid-cols-2 gap-4">
-                       <div className="p-6 aero-panel text-center">
-                         <span className="text-[9px] font-mono text-slate-600 uppercase block mb-1">Riesgo Auditado</span>
-                         <span className="text-lg font-black text-white uppercase font-outfit">{selectedProject.riskLevel}</span>
+                       <div className="p-6 aero-panel bg-slate-50 text-center border-slate-100">
+                         <span className="text-[9px] font-mono text-slate-400 uppercase block mb-1">Riesgo Auditado</span>
+                         <span className="text-lg font-black text-slate-900 uppercase font-outfit">{selectedProject.riskLevel}</span>
                        </div>
-                       <div className="p-6 aero-panel text-center">
-                         <span className="text-[9px] font-mono text-slate-600 uppercase block mb-1">Potencial Retorno</span>
-                         <span className="text-lg font-black text-teal-500 uppercase font-outfit">{selectedProject.returnEstimate}</span>
+                       <div className="p-6 aero-panel bg-slate-50 text-center border-slate-100">
+                         <span className="text-[9px] font-mono text-slate-400 uppercase block mb-1">Potencial Retorno</span>
+                         <span className="text-lg font-black text-teal-600 uppercase font-outfit">{selectedProject.returnEstimate}</span>
                        </div>
                      </div>
                   </div>
                 </div>
               </div>
 
-              <div className="w-full lg:w-[450px] bg-teal-500/[0.02] border-l border-white/5 flex flex-col shrink-0 p-12 space-y-12">
-                <div className="tech-frame p-10 bg-[#0f172a]/70 shadow-2xl space-y-10">
-                  <h5 className="text-[11px] font-mono text-teal-400 uppercase font-black tracking-[0.5em] border-b border-white/5 pb-6">Terminal de Inyección</h5>
+              <div className="w-full lg:w-[450px] bg-slate-50 border-l border-slate-100 flex flex-col shrink-0 p-12 space-y-12">
+                <div className="tech-frame p-10 bg-white shadow-xl space-y-10">
+                  <h5 className="text-[11px] font-mono text-teal-600 uppercase font-black tracking-[0.5em] border-b border-slate-100 pb-6">Terminal de Inyección</h5>
                   <div className="space-y-8">
                     <div className="flex flex-col gap-4">
-                      <span className="text-[10px] font-mono text-slate-500 uppercase tracking-[0.4em] font-black">Monto a Inyectar (USD)</span>
-                      <div className="flex items-baseline justify-between border-b border-white/10 pb-2">
-                        <span className="text-teal-500 text-2xl font-black font-mono">$</span>
+                      <span className="text-[10px] font-mono text-slate-400 uppercase tracking-[0.4em] font-black">Monto a Inyectar (USD)</span>
+                      <div className="flex items-baseline justify-between border-b border-slate-200 pb-2">
+                        <span className="text-teal-600 text-2xl font-black font-mono">$</span>
                         <input 
                           type="number" 
                           value={invAmount} 
                           onChange={(e) => setInvAmount(Math.max(selectedProject.minInvestment, Number(e.target.value)))}
-                          className="bg-transparent text-white text-5xl font-black font-outfit tracking-tighter w-full text-right focus:outline-none"
+                          className="bg-transparent text-slate-900 text-5xl font-black font-outfit tracking-tighter w-full text-right focus:outline-none"
                         />
                       </div>
                     </div>
-                    <div className="flex justify-between text-[9px] font-mono text-slate-700 uppercase font-black">
+                    <div className="flex justify-between text-[9px] font-mono text-slate-400 uppercase font-black">
                       <span>Mínimo Protocolo: ${selectedProject.minInvestment}</span>
                     </div>
                     
                     <div className="grid grid-cols-1 gap-6 pt-4">
                         <div className="flex justify-between items-center">
-                          <span className="text-[10px] font-mono text-slate-600 uppercase font-black tracking-widest">Participación Equity</span>
-                          <span className="text-2xl font-black text-white font-outfit">{calculateStats.equity.toFixed(4)}%</span>
+                          <span className="text-[10px] font-mono text-slate-500 uppercase font-black tracking-widest">Participación Equity</span>
+                          <span className="text-2xl font-black text-slate-900 font-outfit">{calculateStats.equity.toFixed(4)}%</span>
                         </div>
                         <div className="flex justify-between items-center">
-                          <span className="text-[10px] font-mono text-slate-600 uppercase font-black tracking-widest">Retorno Proyectado</span>
-                          <span className="text-2xl font-black text-teal-500 font-outfit">${calculateStats.return.toLocaleString()}</span>
+                          <span className="text-[10px] font-mono text-slate-500 uppercase font-black tracking-widest">Retorno Proyectado</span>
+                          <span className="text-2xl font-black text-teal-600 font-outfit">${calculateStats.return.toLocaleString()}</span>
                         </div>
                     </div>
                   </div>
@@ -402,15 +402,15 @@ const Projects: React.FC = () => {
                   <button 
                     onClick={handleExecute}
                     disabled={protocolStatus !== 'idle'}
-                    className={`w-full py-8 text-white font-mono text-[14px] uppercase tracking-[1em] font-black transition-all duration-700 tech-frame shadow-2xl overflow-hidden ${
-                      protocolStatus === 'success' ? 'bg-green-600' : 'bg-teal-500 hover:bg-white hover:text-black'
+                    className={`w-full py-8 text-white font-mono text-[14px] uppercase tracking-[1em] font-black transition-all duration-700 tech-frame shadow-xl overflow-hidden ${
+                      protocolStatus === 'success' ? 'bg-emerald-600' : 'bg-teal-600 hover:bg-slate-900'
                     }`}
                   >
                     {protocolStatus === 'idle' && 'EJECUTAR ORDEN'}
                     {protocolStatus === 'processing' && 'SINCRO_RT...'}
                     {protocolStatus === 'success' && 'ORDEN CONFIRMADA'}
                   </button>
-                  <p className="text-[9px] text-center text-slate-600 uppercase font-mono tracking-widest leading-relaxed italic">Al ejecutar, acepta los términos de gobernanza del Distrito Rapak.</p>
+                  <p className="text-[9px] text-center text-slate-400 uppercase font-mono tracking-widest leading-relaxed italic">Al ejecutar, acepta los términos de gobernanza del Distrito Rapak.</p>
                 </div>
               </div>
             </div>
